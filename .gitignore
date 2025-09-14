@@ -1,0 +1,11 @@
+# Python / macOS
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+
+# VS Code (opcional)
+.vscode/
+
+# No subir audios locales
+SOUND EFFECTS/**
