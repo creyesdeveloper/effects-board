@@ -9,36 +9,36 @@
       "col": 0,
       "labels": {
         "en": "1,1",
-        "es": "1,1"
+        "es": "Law and Order Sound Effect"
       },
-      "file": null
+      "file": "/Users/macbook/Documents/PROGRAMACION/PYTHON_CODE/EFFECTS_BOARD/SOUND EFFECTS/Law and Order Sound Effect.mp3"
     },
     {
       "row": 0,
       "col": 1,
       "labels": {
         "en": "1,2",
-        "es": "1,2"
+        "es": "Can't Touch This!! - Sound Effect"
       },
-      "file": null
+      "file": "/Users/macbook/Documents/PROGRAMACION/PYTHON_CODE/EFFECTS_BOARD/SOUND EFFECTS/Can't Touch This!! - Sound Effect.mp3"
     },
     {
       "row": 0,
       "col": 2,
       "labels": {
         "en": "1,3",
-        "es": "1,3"
+        "es": "Anda a hacerte cojer chino!!!!"
       },
-      "file": null
+      "file": "/Users/macbook/Documents/PROGRAMACION/PYTHON_CODE/EFFECTS_BOARD/SOUND EFFECTS/Anda a hacerte cojer chino!!!!.mp3"
     },
     {
       "row": 0,
       "col": 3,
       "labels": {
         "en": "1,4",
-        "es": "1,4"
+        "es": "Sonido de piano de Dross"
       },
-      "file": null
+      "file": "/Users/macbook/Documents/PROGRAMACION/PYTHON_CODE/EFFECTS_BOARD/SOUND EFFECTS/Sonido de piano de Dross.mp3"
     },
     {
       "row": 1,
