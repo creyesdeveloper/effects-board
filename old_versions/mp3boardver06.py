@@ -4,6 +4,25 @@ from tkinter import filedialog, messagebox, simpledialog, Menu
 import pygame
 import json
 
+# === Estilos UI ===
+APP_TITLE = "Effects Board"
+ctk.set_appearance_mode("Dark")        # Forzamos dark para consistencia
+ctk.set_default_color_theme("dark-blue")
+ctk.set_widget_scaling(1.05)           # 5% más grande
+
+BTN_WIDTH = 140
+BTN_HEIGHT = 80
+BTN_RADIUS = 12
+BTN_FONT = ("Inter", 14, "bold")
+BTN_FG_ASSIGNED = "#0EA5E9"            # azul (asignado)
+BTN_FG_EMPTY = "#334155"               # slate-700 (vacío)
+BTN_HOVER = "#1F2937"                  # slate-800
+
+PANEL_PADX = 10
+PANEL_PADY = 10
+GRID_SPACING = 8
+
+
 # Ruta para guardar la configuración de botones
 DEFAULT_CONFIG_FILE = "button_config.json"
 
@@ -11,6 +30,54 @@ class AudioButtonApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Audio Button Grid")
+        # ----- Layout raíz
+        self.root.geometry("900x600")
+        self.root.minsize(820, 520)
+        self.root.grid_columnconfigure(0, weight=1)
+        self.root.grid_rowconfigure(1, weight=1)  # fila central expande
+
+        # ----- Top bar
+        self.topbar = ctk.CTkFrame(self.root, corner_radius=0)
+        self.topbar.grid(row=0, column=0, sticky="ew")
+        self.topbar.grid_columnconfigure(0, weight=1)
+
+        self.title_lbl = ctk.CTkLabel(self.topbar, text=APP_TITLE, font=("Inter", 18, "bold"))
+        self.title_lbl.grid(row=0, column=0, padx=(PANEL_PADX, 0), pady=(8, 8), sticky="w")
+
+        self.vol_var = ctk.IntVar(value=80)
+
+        def _on_volume_change(v):
+            try:
+                vol = float(v) / 100.0
+            except Exception:
+                vol = self.vol_var.get() / 100.0
+            try:
+                pygame.mixer.music.set_volume(vol)
+            except Exception:
+                pass
+            # refleja en la etiqueta
+            self.vol_value_lbl.configure(text=f"{int(vol*100)}%")
+
+        # Slider 0..100 (sin warnings de tipos)
+        self.vol_slider = ctk.CTkSlider(
+            self.topbar, from_=0, to=100, number_of_steps=100, command=_on_volume_change, width=180
+        )
+        self.vol_slider.set(self.vol_var.get())
+
+        # Etiquetas
+        ctk.CTkLabel(self.topbar, text="Vol").grid(row=0, column=1, padx=6, pady=8, sticky="e")
+        self.vol_value_lbl = ctk.CTkLabel(self.topbar, text=f"{self.vol_var.get()}%")
+        self.vol_value_lbl.grid(row=0, column=2, padx=(0, 6), pady=8, sticky="e")
+
+        # coloca el slider a la derecha de la etiqueta de porcentaje
+        self.vol_slider.grid(row=0, column=3, padx=(0, PANEL_PADX), pady=8, sticky="e")
+
+        self.vol_slider = ctk.CTkSlider(
+                self.topbar, from_=0.0, to=1.0, number_of_steps=20, command=_on_volume_change, width=180
+                )
+                self.vol_slider.set(self.vol_var.get())
+                ctk.CTkLabel(self.topbar, text="Vol").grid(row=0, column=1, padx=6, pady=8, sticky="e")
+                self.vol_slider.grid(row=0, column=2, padx=(0, PANEL_PADX), pady=8, sticky="e")
 
         # Configurar apariencia general
         ctk.set_appearance_mode("System")  # "Light", "Dark", "System"
